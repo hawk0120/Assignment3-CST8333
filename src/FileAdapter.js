@@ -1,32 +1,46 @@
 /**
- * This Class will handle the lower level fileIO
+ * @author Brady Hawkins
+ * @description File handles the lower level fileIO
  * 
  */
 const Record = require("./Record");
-const csv = require("csv-parser");
+const csvReader = require("csv-parser");
+const createCsvWriter = require("csv-writer").createObjectCsvWriter;
 const fs = require("fs");
 const path = require("path");
 
 
-module.exports = class FileUtil {
+const dataset = [15, "provolone"];
+const file = './resources/cheese.csv';
+const writer = createCsvWriter({
+    path: file,
+    header: new Record
+});
 
-const dataset = [];
-const file = '../resources/canadianCheeseDirectory.csv';
-    
-function loadFileToArray() {
+
+module.exports = {
+
+loadFileToArray: function loadFileToArray() {
     try{
         fs.createReadStream(file)
-        .pipe(csv())
-        .on('data', (data) => dataset.push(data))
+        .pipe(csvReader())
+        .on('data', (data) =>  dataset.push(data));
     } catch (error) {
         console.log("File Loading Error");
     }
-}
+},
 
-function writeToFile() {
+writeToFile: function writeToFile() {
 
+try {
+    writer
+        .writeRecords(dataset)
+        .then( () => console.log("CSV written to file"));
+    } catch (error) {
+        console.log("Write failed")
+    }
 
-}
+},
 
 /**
  * @description Function takes a argument, parses it,
@@ -34,7 +48,7 @@ function writeToFile() {
  * @param array
  * @param arg
  */
-function searchRecords(arg) {
+searchRecords: function searchRecords(arg) {
 
     // if(Number.isNaN(arg)) {
     //     console.log(arg)
@@ -42,8 +56,12 @@ function searchRecords(arg) {
     // } else {
     //     console.log("This is a number: "  + arg);
     // }
-}
+},
 
-function deleteRecords() {}
-    
+deleteRecords: function deleteRecords() { 
+
+
+
+
+    }
 }
