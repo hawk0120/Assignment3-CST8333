@@ -50,18 +50,13 @@ try {
  */
 searchRecords: function searchRecords(arg) {
 
-    // if(Number.isNaN(arg)) {
-    //     console.log(arg)
-    //     console.log("This isn't a number")
-    // } else {
-    //     console.log("This is a number: "  + arg);
-    // }
+        for(i=0; i< dataset.length; i++) {
+            if(dataset[i].cheeseID === arg) {
+                return dataset[i];       
+            }
+        }
 },
 
 deleteRecords: function deleteRecords() { 
-
-
-
-
-    }
+            }
 }
