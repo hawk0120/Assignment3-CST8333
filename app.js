@@ -1,4 +1,5 @@
 
+
 /**
  * @author Brady Hawkins
  * @description File represents the entry point for application
@@ -16,12 +17,11 @@ const findRecord = 2;
 const deleteRecord = 3;
 const updateRecord = 4; 
 const saveFile = 5;
-const exit = 6
-
+const exit = 6;
+var selection = 0;
 
 
 function menu() {
-
                 console.log("*********************************************************");
                 console.log("*                                                       *");
                 console.log("*           Welcome to the CSV Adapter Project          *");
@@ -43,22 +43,24 @@ function menu() {
                const answer = readline.question("Enter a number to select an action: ");
             
                console.log(`You selected ${answer}`);
-               return answer;       
+               
+               selection = parseInt(answer);
 }               
 
 
 var i = 0;
-do {
-        switch(menu()) {
+ do {
+        menu();
+        switch(selection) {
             case loadDataset: 
-                    console.log(datasetReader.loadDataset);
+                    datasetReader.loadDataset;
+                    console.log("Load Successesful");
                     break;
-            
             case addRecord:
                     var cheeseId = readline.question("What is the cheeeseId? ");
                     var cheeseNameEn = readline.question("What is the Cheese Name in English? ");
                     datasetReader.addRecord(cheeseId, cheeseNameEn);
-                  
+                    break;
             case findRecord: 
                     var cheeseId = readline.question("What is the cheeeseId? ");
                     datasetReader.findRecord(cheeseId);
@@ -67,15 +69,16 @@ do {
                    var cheeseId = readline.question("What is the cheeseId? ");
                    
                    datasetReader.deleteRecords(datasetReader.findRecord(cheeseId));
+                   break;
             case updateRecord:
-                   
+                   datasetReader.updateRecords;
+                   break;
             case saveFile:
                     datasetReader.writeFile();
-                    
+                    break;
             case exit:
                     i = 9;
                     return;      
 
         }
 } while(i != 9);
-        
