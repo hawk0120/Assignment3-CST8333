@@ -13,27 +13,29 @@ module.exports = {
 
     loadDataset: function loadDataset() {
         fileUtil.loadFileToArray();
+        return "Success";
     },
 
     writeFile: function writeFile() {
         fileUtil.writeToFile();
+        
     },
 
-    findRecord: function findRecords(field, id) {
-        fileUtil.searchRecords(field, id);
+    findRecord: function findRecord (id) {
+        fileUtil.searchRecords(id);
     },
 
-    createNewRecord: function createNewRecord() {
-        const record = new Record();
+    createNewRecord: function createNewRecord(field, id) {
+        const record = new Record(field, id);
         fileUtil.addRecord(record);
     },
 
     displayAllRecords: function displayAllRecords() {
-       
+            fileUtil.displayRecords();
     },
 
-    deleteRecords: function deleteRecords() {
-        record.searchRecords(record);
+    deleteRecords: function deleteRecords(record) {
+        record.searchRecords(record.cheeseId);
         fileUtil.deleteRecords();
     }
 
