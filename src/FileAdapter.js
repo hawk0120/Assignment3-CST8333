@@ -10,11 +10,14 @@ const fs = require("fs");
 const path = require("path");
 
 
-const dataset = [15, "provolone"];
+const dataset = [ "provolone", 15];
+const record = new Record(dataset);
+
 const file = './resources/cheese.csv';
 const writer = createCsvWriter({
     path: file,
-    header: new Record
+    header: [ record ]
+    
 });
 
 
@@ -30,14 +33,18 @@ loadFileToArray: function loadFileToArray() {
     }
 },
 
-writeToFile: function writeToFile() {
 
+/**
+ * @description Function writes an Array of the objects to a csv file
+ */
+writeToFile: function writeToFile() {
 try {
-    writer
-        .writeRecords(dataset)
-        .then( () => console.log("CSV written to file"));
+  
+    writer  
+      async () => writeRecords(dataset)
+
     } catch (error) {
-        console.log("Write failed")
+        throw new error();
     }
 
 },
@@ -45,18 +52,24 @@ try {
 /**
  * @description Function takes a argument, parses it,
  * searchs array for arg, and returns that row
- * @param array
- * @param arg
+ * @param field
+ * @param id
  */
-searchRecords: function searchRecords(arg) {
+searchRecords: function searchRecords(field, id) {
 
         for(i=0; i< dataset.length; i++) {
-            if(dataset[i].cheeseID === arg) {
+            if(dataset[i].field === id) {
                 return dataset[i];       
             }
         }
 },
 
-deleteRecords: function deleteRecords() { 
-            }
+deleteRecords: function deleteRecords(record) { 
+        dataset.splice(record);
+ },
+
+addRecord: function addRecord(record) {
+    dataset.push(record)
+}
+
 }
