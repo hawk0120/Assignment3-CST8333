@@ -6,7 +6,7 @@
  *  - CST8333 Research project Assignment 3
  */
 
-const datasetReader = require("./src/DatasetReader");
+const datasetReader = require("./src/DatasetReader.js");
 const readline = require('readline-sync');
 
 
@@ -17,7 +17,7 @@ const deleteRecord = 3;
 const updateRecord = 4; 
 const saveFile = 5;
 const exit = 6
-var selection;
+
 
 
 function menu() {
@@ -40,20 +40,20 @@ function menu() {
                 console.log("6. Exit Program");
                 console.log();
 
-               var answer = readline.question("Enter a number to select an action: ");
-               selection = answer;
+               const answer = readline.question("Enter a number to select an action: ");
+            
                console.log(`You selected ${answer}`);
-               
+               return answer;       
 }               
 
 
 var i = 0;
 do {
-        menu();
-        switch(selection) {
-            case loadDataset:
+        switch(menu()) {
+            case loadDataset: 
                     console.log(datasetReader.loadDataset);
                     break;
+            
             case addRecord:
                     var cheeseId = readline.question("What is the cheeeseId? ");
                     var cheeseNameEn = readline.question("What is the Cheese Name in English? ");
@@ -74,11 +74,8 @@ do {
                     
             case exit:
                     i = 9;
-                    return;
-        //     default:
-        //             console.log("You didn't make a selection");
-        //             break;
-                        
+                    return;      
+
         }
 } while(i != 9);
         
