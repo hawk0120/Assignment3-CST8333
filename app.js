@@ -17,9 +17,7 @@ const deleteRecord = 3;
 const updateRecord = 4; 
 const saveFile = 5;
 const exit = 6
-var selection = 9;
-var i = 0;
-
+var selection;
 
 
 function menu() {
@@ -39,38 +37,36 @@ function menu() {
                 console.log("3. Delete a record: ");
                 console.log("4. Update a record: ");
                 console.log("5. Save to file: ");
+                console.log("6. Exit Program");
                 console.log();
 
                var answer = readline.question("Enter a number to select an action: ");
-               this.selection = answer;
+               selection = answer;
                console.log(`You selected ${answer}`);
-                
+               
 }               
 
 
-// function getRecordvalues() {
-//     console.log("What is the Che
-// }
-
-
-
-
-
-
-{
+var i = 0;
+do {
         menu();
-        switch(i) {
+        switch(selection) {
             case loadDataset:
-                    datasetReader.loadDataset;
+                    console.log(datasetReader.loadDataset);
                     break;
             case addRecord:
-                //     this.getRecord();
-                    
-                    
-            case findRecord:
-                    
+                    var cheeseId = readline.question("What is the cheeeseId? ");
+                    var cheeseNameEn = readline.question("What is the Cheese Name in English? ");
+                    datasetReader.addRecord(cheeseId, cheeseNameEn);
+                  
+            case findRecord: 
+                    var cheeseId = readline.question("What is the cheeeseId? ");
+                    datasetReader.findRecord(cheeseId);
+                    break;
             case deleteRecord:
+                   var cheeseId = readline.question("What is the cheeseId? ");
                    
+                   datasetReader.deleteRecords(datasetReader.findRecord(cheeseId));
             case updateRecord:
                    
             case saveFile:
@@ -78,10 +74,11 @@ function menu() {
                     
             case exit:
                     i = 9;
-                    break;
-            default:
-                    i = 9;
-                    break;
+                    return;
+        //     default:
+        //             console.log("You didn't make a selection");
+        //             break;
                         
-        } while(i != 9);
-}
+        }
+} while(i != 9);
+        
